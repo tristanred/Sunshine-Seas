@@ -1,0 +1,3 @@
+[submodule "game/lib/MicroEngine"]
+	path = game/lib/MicroEngine
+	url = git@github.com:tristanred/MicroEngine.git
