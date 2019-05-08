@@ -1,6 +1,7 @@
 #include "Player.h"
 
 #include <Input/AKeyboard.h>
+#include <math.h>
 
 Player::Player()
     : GameObject()
@@ -33,30 +34,30 @@ void Player::Update(unsigned int deltaTime)
 
     if(this->GetEngine()->Keyboard->IsKeyDown(Key::D))
     {
-        if(this->velocity.x < MAX_VELOCITY)
+        if(abs(this->velocity.x) < MAX_VELOCITY)
         {
-            this->velocity.x += 1;
+            this->velocity.x += 1 * (deltaTime / 10);
         }
     }
     if(this->GetEngine()->Keyboard->IsKeyDown(Key::S))
     {
-        if(this->velocity.y < MAX_VELOCITY)
+        if(abs(this->velocity.y) < MAX_VELOCITY)
         {
-            this->velocity.y += 1;
+            this->velocity.y += 1 * (deltaTime / 10);
         }
     }
     if(this->GetEngine()->Keyboard->IsKeyDown(Key::A))
     {
-        if(this->velocity.x < MAX_VELOCITY)
+        if(abs(this->velocity.x) < MAX_VELOCITY)
         {
-            this->velocity.x -= 1;
+            this->velocity.x -= 1 * (deltaTime / 10);
         }
     }
     if(this->GetEngine()->Keyboard->IsKeyDown(Key::W))
     {
-        if(this->velocity.y < MAX_VELOCITY)
+        if(abs(this->velocity.y) < MAX_VELOCITY)
         {
-            this->velocity.y -= 1;
+            this->velocity.y -= 1 * (deltaTime / 10);
         }
     }
 
