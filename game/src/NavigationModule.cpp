@@ -2,14 +2,21 @@
 
 #include <ResourceManager.h>
 
+TestSprite::TestSprite(ARenderer* renderer)
+    : ASprite(renderer)
+{
+}
 
+TestSprite::~TestSprite()
+{
+}
 
 NavigationModule::NavigationModule(GameEngine* engine)
     : GameModule(engine)
 {
     engine->ResManager->AddAssetRoot("assets");
 
-    this->WorldMap = this->CreateSprite();
+    this->WorldMap = this->CreateSprite<TestSprite>();
     this->WorldMap->SetTexture("TestIsland.png");
 
     this->GamePlayer = new Player();

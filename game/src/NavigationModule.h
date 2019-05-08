@@ -4,6 +4,13 @@
 
 #include "Player.h"
 
+class TestSprite : public ASprite
+{
+public:
+    TestSprite(ARenderer* renderer);
+    ~TestSprite();
+};
+
 class NavigationModule : public GameModule
 {
 public:

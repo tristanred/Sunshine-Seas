@@ -13,7 +13,6 @@ public:
 
     vec2 velocity;
 
-
     Player();
     ~Player();
 

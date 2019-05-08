@@ -51,7 +51,6 @@ void Player::Update(unsigned int deltaTime)
         {
             this->velocity.x -= 1;
         }
-
     }
     if(this->GetEngine()->Keyboard->IsKeyDown(Key::W))
     {
