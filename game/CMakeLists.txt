@@ -57,7 +57,7 @@ ENDIF(WIN32)
 
 ## SunshineSeas
 file(GLOB_RECURSE GAME_SOURCES "src/*.cpp")
-file(GLOB_RECURSE GAME_HEADERS "include/*.h")
+file(GLOB_RECURSE GAME_HEADERS "src/*.h")
 
 # Add the engine files to be included by others
 include_directories("include")
