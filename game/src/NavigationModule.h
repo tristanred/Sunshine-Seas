@@ -3,6 +3,8 @@
 #include <Game/Game.h>
 
 #include "Player.h"
+#include "Navigation/Map.h"
+
 
 class TestSprite : public ASprite
 {
@@ -19,7 +21,7 @@ public:
 
     Player* GamePlayer;
 
-    ASprite* WorldMap;
+    Map* WorldMap;
 
     void Update(unsigned int deltaTime) override;
     void Draw(ARenderer* renderer) override;

@@ -1,0 +1,6 @@
+<map image="world01.png">
+    <islands>
+        <island name="one" position="287, 148" size="219, 192" />
+        <island name="two" position="781, 76" size="151, 130" />
+    </islands>
+</map>
