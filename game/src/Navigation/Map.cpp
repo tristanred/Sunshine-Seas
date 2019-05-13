@@ -28,7 +28,7 @@ Map::Map(GameEngine* engine)
         for(int k = 0; k < gridHeight; k++)
         {
             FRectangle gridsRect = FRectangle(i * 64, k * 64, 64, 64);
-            mapTex->StrokeRect(gridsRect, 2, 0xFF000000);
+            mapTex->StrokeRect(gridsRect, 2, 0xFF0000FF);
         }
     }
 }
