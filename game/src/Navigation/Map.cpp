@@ -43,6 +43,7 @@ Map::Map(GameEngine* engine)
     {
         for(int k = 0; k < gridHeight; k++)
         {
+            // Assign navigation properties
             NavigationCell* cell = cellsArray[i][k];
             if(i > 0)
             {
@@ -59,6 +60,16 @@ Map::Map(GameEngine* engine)
             if(k < gridHeight - 1)
             {
                 cell->down = cellsArray[i][k + 1];
+            }
+
+            // Assign passable/blocked properties
+            if (cell->rect->Intersect(islandOne) || cell->rect->Intersect(islandTwo))
+            {
+                cell->passable = false;
+            }
+            else
+            {
+                cell->passable = true;
             }
         }
     }
