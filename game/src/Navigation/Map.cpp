@@ -31,7 +31,7 @@ Map::Map(GameEngine* engine)
         for(int k = 0; k < gridHeight; k++)
         {
             FRectangle* gridsRect = new FRectangle(i * 64, k * 64, 64, 64);
-            mapTex->StrokeRect(*gridsRect, 2, 0xFF0000FF);
+            //mapTex->StrokeRect(*gridsRect, 2, 0xFF0000FF);
             
             NavigationCell* cell = new NavigationCell(gridsRect);
             cells->Add(cell);
@@ -81,7 +81,7 @@ Map::Map(GameEngine* engine)
             }
 
             // Assign passable/blocked properties
-            if (cell->rect->Intersect(islandOne) || cell->rect->Intersect(islandTwo))
+            if (cell->inner->Intersect(islandOne) || cell->inner->Intersect(islandTwo))
             {
                 cell->passable = false;
             }
@@ -89,6 +89,46 @@ Map::Map(GameEngine* engine)
             {
                 cell->passable = true;
             }
+            
+            // Draw some debug stuff
+            if(cell->Left() != NULL)
+            {
+                mapTex->DrawLine(cell->inner->GetCenter(), cell->Left()->inner->GetCenter(), 0xFF0000FF, 2);
+            }
+            if(cell->Up() != NULL)
+            {
+                mapTex->DrawLine(cell->inner->GetCenter(), cell->Up()->inner->GetCenter(), 0xFF0000FF, 2);
+            }
+            if(cell->Right() != NULL)
+            {
+                mapTex->DrawLine(cell->inner->GetCenter(), cell->Right()->inner->GetCenter(), 0xFF0000FF, 2);
+            }
+            if(cell->Down() != NULL)
+            {
+                mapTex->DrawLine(cell->inner->GetCenter(), cell->Down()->inner->GetCenter(), 0xFF0000FF, 2);
+            }
+            if(cell->Up_Left() != NULL)
+            {
+                mapTex->DrawLine(cell->inner->GetCenter(), cell->Up_Left()->inner->GetCenter(), 0xFF0000FF, 2);
+            }
+            if(cell->Up_Right() != NULL)
+            {
+                mapTex->DrawLine(cell->inner->GetCenter(), cell->Up_Right()->inner->GetCenter(), 0xFF0000FF, 2);
+            }
+            if(cell->Down_Right() != NULL)
+            {
+                mapTex->DrawLine(cell->inner->GetCenter(), cell->Down_Right()->inner->GetCenter(), 0xFF0000FF, 2);
+            }
+            if(cell->Down_Left() != NULL)
+            {
+                mapTex->DrawLine(cell->inner->GetCenter(), cell->Down_Left()->inner->GetCenter(), 0xFF0000FF, 2);
+            }
+
+
+
+
+
+
         }
     }
 

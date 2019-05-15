@@ -3,13 +3,12 @@
 #include <Game/Navigation/ITraversable.h>
 #include <libtech/geometry.h>
 
-class NavigationCell : public ITraversable
+class NavigationCell : public ITraversable<FRectangle>
 {
 public:
     NavigationCell(FRectangle* r);
     ~NavigationCell();
     
-    FRectangle* rect;
     bool passable;
     NavigationCell* left;
     NavigationCell* up;
@@ -22,13 +21,13 @@ public:
     NavigationCell* down_left;
     
     bool IsPassable() override;
-    ITraversable* Left() override;
-    ITraversable* Up() override;
-    ITraversable* Right() override;
-    ITraversable* Down() override;
+    NavigationCell* Left() override;
+    NavigationCell* Up() override;
+    NavigationCell* Right() override;
+    NavigationCell* Down() override;
     
-    ITraversable* Up_Left() override;
-    ITraversable* Up_Right() override;
-    ITraversable* Down_Right() override;
-    ITraversable* Down_Left() override;
+    NavigationCell* Up_Left() override;
+    NavigationCell* Up_Right() override;
+    NavigationCell* Down_Right() override;
+    NavigationCell* Down_Left() override;
 };
