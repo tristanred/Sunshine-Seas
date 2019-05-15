@@ -39,11 +39,12 @@ Map::Map(GameEngine* engine)
     }
     
     auto cellsArray = cells->GetListAs2dArray(gridWidth);
-    for(int i = 0; i < gridWidth; i++)
+    for(int i = 0; i < gridHeight; i++)
     {
-        for(int k = 0; k < gridHeight; k++)
+        for(int k = 0; k < gridWidth; k++)
         {
             // Assign navigation properties
+            // Orthogonal
             NavigationCell* cell = cellsArray[i][k];
             if(i > 0)
             {
@@ -60,6 +61,23 @@ Map::Map(GameEngine* engine)
             if(k < gridHeight - 1)
             {
                 cell->down = cellsArray[i][k + 1];
+            }
+            // Diagonal
+            if(i != 0 && k != 0)
+            {
+                cell->up_left = cellsArray[i - 1][k - 1];
+            }
+            if(i != 0 && k != gridWidth - 1)
+            {
+                cell->up_right = cellsArray[i - 1][k + 1];
+            }
+            if(i != gridHeight - 1 && k != gridWidth - 1)
+            {
+                cell->down_right = cellsArray[i + 1][k + 1];
+            }
+            if(i != gridHeight - 1 && k != 0)
+            {
+                cell->down_left = cellsArray[i + 1][k - 1];
             }
 
             // Assign passable/blocked properties
