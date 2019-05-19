@@ -6,7 +6,7 @@ class NavigationCell;
 #include <libtech/arraylist.h>
 #include <libtech/geometry.h>
 
-#define GRIDSIZE 128
+#define GRIDSIZE 64
 
 class Map : public ARenderable
 {

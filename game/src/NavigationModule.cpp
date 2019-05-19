@@ -38,11 +38,14 @@ void NavigationModule::Update(unsigned int deltaTime)
     {
         this->GetRenderer()->SaveToFile(this->WorldMap, "before.png");
         
+        FPosition playerPos = this->GamePlayer->PlayerSprite->GetRectangle().GetCenter();
+        auto playerCell = this->WorldMap->GetCurrentCell(playerPos);
+        
         NavigationCell* from = this->WorldMap->GetCell(0, 3);
         NavigationCell* to = this->WorldMap->GetCell(15, 1);
         //NavigationCell* to = this->WorldMap->GetCell(2, 2);
         
-        auto path = Pathfind(from, to, NULL, NULL);
+        auto path = Pathfind(playerCell, to, NULL, NULL);
         
         NavigationCell* previous = path->Get(0);
         for(int i = 1; i < path->Count(); i++)

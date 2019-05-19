@@ -60,11 +60,6 @@ void Player::Update(unsigned int deltaTime)
             this->velocity.y -= 1 * (deltaTime / 10);
         }
     }
-    if(this->GetEngine()->Keyboard->IsKeyClicked(Key::Space))
-    {
-        //this->GetEngine()->Renderer->ScreenshotNextFrame();
-        //this->GetEngine()->Renderer->SaveToFile(this->PlayerSprite, "aa.png");
-    }
 
     FPosition pos = this->PlayerSprite->GetPosition();
     pos.X += this->velocity.x;
