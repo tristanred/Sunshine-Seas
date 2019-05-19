@@ -24,6 +24,8 @@ NavigationModule::NavigationModule(GameEngine* engine)
 
     this->GamePlayer = new Player();
     this->GamePlayer->Setup(this);
+
+    this->navig = NULL;
 }
 
 NavigationModule::~NavigationModule()
@@ -33,21 +35,21 @@ NavigationModule::~NavigationModule()
 void NavigationModule::Update(unsigned int deltaTime)
 {
     GameModule::Update(deltaTime);
-    
+
     if(this->GetEngine()->Keyboard->IsKeyClicked(Key::Space))
     {
         this->WorldMap->GraphicLayer->GetTexture()->FillColor(0x00000000);
         this->GetRenderer()->SaveToFile(this->WorldMap, "before.png");
-        
+
         FPosition playerPos = this->GamePlayer->PlayerSprite->GetRectangle().GetCenter();
         auto playerCell = this->WorldMap->GetCurrentCell(playerPos);
-        
+
         NavigationCell* from = this->WorldMap->GetCell(0, 3);
         NavigationCell* to = this->WorldMap->GetCell(15, 1);
         //NavigationCell* to = this->WorldMap->GetCell(2, 2);
-        
+
         auto path = Pathfind(playerCell, to, NULL, NULL);
-        
+
         if(path == NULL)
         {
             LogWarning("NO PATH FOUND.");
@@ -58,18 +60,33 @@ void NavigationModule::Update(unsigned int deltaTime)
             for(int i = 1; i < path->Count(); i++)
             {
                 NavigationCell* current = path->Get(i);
-                
+
                 this->WorldMap->GraphicLayer->GetTexture()->DrawLine(previous->inner->GetCenter(), current->inner->GetCenter(), 0x0000FFFF, 2);
-                
+
                 previous = current;
-            }        }
-        
-        
+            }
+            
+            if(this->navig != NULL)
+            {
+                delete(this->navig);
+            }
+
+            this->navig = new PointListNavigator(path);
+            this->navig->Object = this->GamePlayer->PlayerSprite;
+            this->navig->Start(10000);
+        }
+
         this->GetRenderer()->SaveToFile(this->WorldMap, "after.png");
     }
 
     //this->WorldMap->Update(deltaTime);
     this->GamePlayer->Update(deltaTime);
+
+    if(this->navig != NULL)
+    {
+        deltaTime = 22;
+        this->navig->Update(deltaTime);
+    }
 }
 
 void NavigationModule::Draw(ARenderer* renderer)
