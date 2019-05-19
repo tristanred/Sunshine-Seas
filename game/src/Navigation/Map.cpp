@@ -1,6 +1,7 @@
 #include "Map.h"
 
 #include "Pathfinding.h"
+#include <libtech/stdutils.h>
 
 Map::Map(GameEngine* engine)
     : ARenderable(engine->Renderer)
@@ -22,26 +23,26 @@ Map::Map(GameEngine* engine)
 
     this->AddChild(this->MapImage);
 
-    int gridWidth = mapTex->GetSize().Width / 64;
-    int gridHeight = mapTex->GetSize().Height / 64;
+    GridWidth = mapTex->GetSize().Width / GRIDSIZE;
+    GridHeight = mapTex->GetSize().Height / GRIDSIZE;
 
-    ArrayList<NavigationCell*>* cells = new ArrayList<NavigationCell*>(gridWidth * gridHeight);
-    for(int i = 0; i < gridWidth; i++)
+    this->navigationGrid = new ArrayList<NavigationCell*>(GridWidth * GridHeight);
+    for(int i = 0; i < GridWidth; i++)
     {
-        for(int k = 0; k < gridHeight; k++)
+        for(int k = 0; k < GridHeight; k++)
         {
-            FRectangle* gridsRect = new FRectangle(i * 64, k * 64, 64, 64);
+            FRectangle* gridsRect = new FRectangle(i * GRIDSIZE, k * GRIDSIZE, GRIDSIZE, GRIDSIZE);
             mapTex->StrokeRect(*gridsRect, 1, 0xFF0000FF);
-            
+
             NavigationCell* cell = new NavigationCell(gridsRect);
-            cells->Add(cell);
+            this->navigationGrid->Add(cell);
         }
     }
-    
-    auto cellsArray = cells->GetListAs2dArray(gridWidth);
-    for(int i = 0; i < gridHeight; i++)
+
+    auto cellsArray = this->navigationGrid->GetListAs2dArray(GridWidth);
+    for(int i = 0; i < GridHeight; i++)
     {
-        for(int k = 0; k < gridWidth; k++)
+        for(int k = 0; k < GridWidth; k++)
         {
             // Assign navigation properties
             // Orthogonal
@@ -50,7 +51,7 @@ Map::Map(GameEngine* engine)
             {
                 cell->left = cellsArray[i - 1][k];
             }
-            if(i < gridWidth - 1)
+            if(i < GridWidth - 1)
             {
                 cell->right = cellsArray[i + 1][k];
             }
@@ -58,7 +59,7 @@ Map::Map(GameEngine* engine)
             {
                 cell->up = cellsArray[i][k - 1];
             }
-            if(k < gridHeight - 1)
+            if(k < GridHeight - 1)
             {
                 cell->down = cellsArray[i][k + 1];
             }
@@ -67,15 +68,15 @@ Map::Map(GameEngine* engine)
             {
                 cell->up_left = cellsArray[i - 1][k - 1];
             }
-            if(i != 0 && k != gridWidth - 1)
+            if(i != 0 && k != GridWidth - 1)
             {
                 cell->up_right = cellsArray[i - 1][k + 1];
             }
-            if(i != gridHeight - 1 && k != gridWidth - 1)
+            if(i != GridHeight - 1 && k != GridWidth - 1)
             {
                 cell->down_right = cellsArray[i + 1][k + 1];
             }
-            if(i != gridHeight - 1 && k != 0)
+            if(i != GridHeight - 1 && k != 0)
             {
                 cell->down_left = cellsArray[i + 1][k - 1];
             }
@@ -91,7 +92,7 @@ Map::Map(GameEngine* engine)
                 cell->passable = true;
                 mapTex->FillRect(*cell->inner, 0x00FF0032);
             }
-            
+
             // Draw some debug stuff
             //if(cell->Left() != NULL)
             //{
@@ -128,9 +129,30 @@ Map::Map(GameEngine* engine)
         }
     }
 
+    DELETE_XDIM_ARRAY(cellsArray, GridHeight);
 }
 
 Map::~Map()
 {
 
+}
+
+NavigationCell* Map::GetCurrentCell(FPosition playerPosition)
+{
+    for(int i = 0; i < navigationGrid->Count(); i++)
+    {
+        NavigationCell* cell = navigationGrid->Get(i);
+        if(cell->inner->PointIsInside(playerPosition))
+        {
+            return cell;
+        }
+    }
+    
+    return NULL;
+}
+
+NavigationCell* Map::GetCell(int column, int row)
+{
+    int index = (column * this->GridWidth) + row;
+    return navigationGrid->Get(index);
 }
