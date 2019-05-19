@@ -36,6 +36,7 @@ void NavigationModule::Update(unsigned int deltaTime)
     
     if(this->GetEngine()->Keyboard->IsKeyClicked(Key::Space))
     {
+        this->WorldMap->GraphicLayer->GetTexture()->FillColor(0x00000000);
         this->GetRenderer()->SaveToFile(this->WorldMap, "before.png");
         
         FPosition playerPos = this->GamePlayer->PlayerSprite->GetRectangle().GetCenter();
@@ -47,15 +48,22 @@ void NavigationModule::Update(unsigned int deltaTime)
         
         auto path = Pathfind(playerCell, to, NULL, NULL);
         
-        NavigationCell* previous = path->Get(0);
-        for(int i = 1; i < path->Count(); i++)
+        if(path == NULL)
         {
-            NavigationCell* current = path->Get(i);
-            
-            this->WorldMap->MapImage->GetTexture()->DrawLine(previous->inner->GetCenter(), current->inner->GetCenter(), 0x0000FFFF, 2);
-            
-            previous = current;
+            LogWarning("NO PATH FOUND.");
         }
+        else
+        {
+            NavigationCell* previous = path->Get(0);
+            for(int i = 1; i < path->Count(); i++)
+            {
+                NavigationCell* current = path->Get(i);
+                
+                this->WorldMap->GraphicLayer->GetTexture()->DrawLine(previous->inner->GetCenter(), current->inner->GetCenter(), 0x0000FFFF, 2);
+                
+                previous = current;
+            }        }
+        
         
         this->GetRenderer()->SaveToFile(this->WorldMap, "after.png");
     }

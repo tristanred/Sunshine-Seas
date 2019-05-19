@@ -10,6 +10,11 @@ Map::Map(GameEngine* engine)
 
     this->MapImage = engine->CreateSprite();
     this->MapImage->SetTexture("world01.png");
+    
+    this->GraphicLayer = engine->CreateSprite();
+    ATexture* transparentTexture = engine->CreateTexture();
+    transparentTexture->SetSolidColor(this->MapImage->GetSize(), 0x00000000);
+    this->GraphicLayer->SetTexture(transparentTexture);
 
     ATexture* mapTex = this->MapImage->GetTexture();
     //FRectangle r = FRectangle(0, 25, 70, 70);
@@ -22,6 +27,7 @@ Map::Map(GameEngine* engine)
     this->islands->Add(islandTwo);
 
     this->AddChild(this->MapImage);
+    this->AddChild(this->GraphicLayer);
 
     GridWidth = mapTex->GetSize().Width / GRIDSIZE;
     GridHeight = mapTex->GetSize().Height / GRIDSIZE;

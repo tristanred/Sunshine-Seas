@@ -15,6 +15,7 @@ public:
     ~Map();
 
     ASprite* MapImage;
+    ASprite* GraphicLayer;
     ArrayList<FRectangle*>* islands;
 
     NavigationCell* GetCurrentCell(FPosition playerPosition);
