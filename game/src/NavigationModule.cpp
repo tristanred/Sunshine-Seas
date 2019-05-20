@@ -24,6 +24,10 @@ NavigationModule::NavigationModule(GameEngine* engine)
 
     this->GamePlayer = new Player();
     this->GamePlayer->Setup(this);
+    
+    this->camera = new NavigationCamera(this->GetEngine());
+    this->camera->TrackObject(this->GamePlayer->PlayerSprite);
+    this->camera->Activate();
 
     this->navig = NULL;
 }
@@ -35,6 +39,8 @@ NavigationModule::~NavigationModule()
 void NavigationModule::Update(unsigned int deltaTime)
 {
     GameModule::Update(deltaTime);
+    
+    this->camera->Update(deltaTime);
 
     if(this->GetEngine()->Keyboard->IsKeyClicked(Key::Space))
     {
@@ -42,11 +48,9 @@ void NavigationModule::Update(unsigned int deltaTime)
         this->GetRenderer()->SaveToFile(this->WorldMap, "before.png");
 
         FPosition playerPos = this->GamePlayer->PlayerSprite->GetRectangle().GetCenter();
+        
         auto playerCell = this->WorldMap->GetCurrentCell(playerPos);
-
-        NavigationCell* from = this->WorldMap->GetCell(0, 3);
         NavigationCell* to = this->WorldMap->GetCell(15, 1);
-        //NavigationCell* to = this->WorldMap->GetCell(2, 2);
 
         auto path = Pathfind(playerCell, to, NULL, NULL);
 

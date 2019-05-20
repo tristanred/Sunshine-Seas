@@ -6,6 +6,7 @@
 #include "Navigation/Map.h"
 #include "Navigation/Navigator.h"
 #include "Navigation/PointListNavigator.h"
+#include "Navigation/NavigationCamera.h"
 
 class TestSprite : public ASprite
 {
@@ -20,8 +21,8 @@ public:
     NavigationModule(GameEngine* engine);
     ~NavigationModule();
 
+    NavigationCamera* camera;
     Player* GamePlayer;
-
     Map* WorldMap;
 
     PointListNavigator* navig;
