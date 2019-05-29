@@ -81,6 +81,11 @@ target_compile_options(SunshineSeas PRIVATE -Wall)
 
 ENDIF(WIN32)
 
+IF(APPLE)
+    SET(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -x objective-c++")
+    set(CMAKE_EXE_LINKER_FLAGS "-framework AppKit")
+ENDIF(APPLE)
+
 #
 # Copy the dependencies to the output folder
 #
