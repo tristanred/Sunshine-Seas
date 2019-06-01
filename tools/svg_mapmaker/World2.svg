@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 4096 4096" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
+  <defs>
+    <bx:grid x="0" y="0" width="100" height="100"/>
+  </defs>
+  <rect width="4096" height="4096" style="fill: rgb(56, 159, 255);">
+    <title>BG_Sea</title>
+  </rect>
+  <rect x="645.157" y="343.927" width="819.84" height="700.228" rx="20" ry="20" style="fill: rgb(216, 216, 216);">
+    <title>Island_One</title>
+  </rect>
+  <rect x="1236.118" y="1367.467" width="163.882" height="162.898" rx="20" ry="20" style="fill: rgb(216, 216, 216);">
+    <title>Island_Two</title>
+  </rect>
+  <rect x="1500" y="1636.451" width="200" height="163.549" rx="20" ry="20" style="fill: rgb(216, 216, 216);">
+    <title>Island_Three</title>
+  </rect>
+  <rect x="2500" y="421.498" width="100" height="78.502" rx="20" ry="20" style="fill: rgb(216, 216, 216);">
+    <title>Island_Four</title>
+  </rect>
+  <rect x="1337.173" y="1953.055" width="162.827" height="146.945" rx="20" ry="20" style="fill: rgb(216, 216, 216);">
+    <title>Island_Five</title>
+  </rect>
+  <rect x="1762.859" y="2000" width="172.714" height="156.665" rx="20" ry="20" style="fill: rgb(216, 216, 216);">
+    <title>Island_Six</title>
+  </rect>
+  <rect x="2154.959" y="2360.097" width="200" height="139.903" rx="20" ry="20" style="fill: rgb(216, 216, 216);">
+    <title>Island_Seven</title>
+  </rect>
+  <rect x="2300" y="1900" width="100" height="100" rx="20" ry="20" style="fill: rgb(216, 216, 216);">
+    <title>Island_Eigth</title>
+  </rect>
+  <rect x="1800" y="200" width="344.177" height="239.05" rx="20" ry="20" style="fill: rgb(216, 216, 216);">
+    <title>Island_Nine</title>
+  </rect>
+  <rect x="3300" width="900" height="1545.969" rx="20" ry="20" style="fill: rgb(216, 216, 216);" y="-100">
+    <title>Island_Ten</title>
+  </rect>
+  <rect x="500" y="2800" width="300" height="1000" rx="20" ry="20" style="fill: rgb(216, 216, 216);">
+    <title>Island_Eleven</title>
+  </rect>
+  <rect x="2700" y="3300" width="200" height="300" rx="20" ry="20" style="fill: rgb(216, 216, 216);">
+    <title>Island_Twelve</title>
+  </rect>
+  <rect x="1337.173" y="2600" width="262.827" height="200" rx="20" ry="20" style="fill: rgb(216, 216, 216);">
+    <title>Island_13</title>
+  </rect>
+  <rect x="400" y="1742.564" width="159.024" height="157.436" rx="20" ry="20" style="fill: rgb(216, 216, 216);">
+    <title>Island_14</title>
+  </rect>
+  <rect x="400" y="2060.097" width="200" height="180.295" rx="20" ry="20" style="fill: rgb(216, 216, 216);">
+    <title>Island_15</title>
+  </rect>
+  <rect x="1600" y="3300" width="252.656" height="200" rx="20" ry="20" style="fill: rgb(216, 216, 216);">
+    <title>Island_16</title>
+  </rect>
+  <rect x="3300" y="2800" width="230.313" height="231.452" rx="20" ry="20" style="fill: rgb(216, 216, 216);">
+    <title>Island_17</title>
+  </rect>
+  <rect x="3471.888" y="2258.681" width="128.113" height="180.237" rx="20" ry="20" style="fill: rgb(216, 216, 216);">
+    <title>Island_18</title>
+  </rect>
+  <rect x="2946.902" y="1636.451" width="102.749" height="163.549" rx="20" ry="20" style="fill: rgb(216, 216, 216);">
+    <title>Island_19</title>
+  </rect>
+</svg>
