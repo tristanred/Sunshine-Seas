@@ -4,6 +4,7 @@
 #include <Input/AKeyboard.h>
 
 #include "Navigation/Pathfinding.h"
+#include <libtech/geometry.h>
 
 TestSprite::TestSprite(ARenderer* renderer)
     : ASprite(renderer)
@@ -41,6 +42,14 @@ void NavigationModule::Update(unsigned int deltaTime)
     GameModule::Update(deltaTime);
 
     this->camera->Update(deltaTime);
+    
+    FPolygon playerPol = this->GamePlayer->PlayerSprite->GetPolygon();
+    FPolygon islandOnePol = this->WorldMap->islands->Get(0)->AsPolygon();
+    
+    if(playerPol.IsCollision(&islandOnePol))
+    {
+        printf("Oh dang");
+    }
 
     if(this->GetEngine()->Keyboard->IsKeyClicked(Key::Space))
     {
