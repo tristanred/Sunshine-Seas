@@ -5,6 +5,7 @@
 
 #include "Navigation/Pathfinding.h"
 #include <libtech/geometry.h>
+#include "DrawShapeHelper.h"
 
 TestSprite::TestSprite(ARenderer* renderer)
     : ASprite(renderer)
@@ -31,6 +32,29 @@ NavigationModule::NavigationModule(GameEngine* engine)
     this->camera->Activate();
 
     this->navig = NULL;
+
+    FPolygon pol;
+    vec2 p1 = vec2(250, 0);
+    vec2 p2 = vec2(500, 200);
+    vec2 p3 = vec2(350, 500);
+    vec2 p4 = vec2(150, 500);
+    vec2 p5 = vec2(0, 200);
+    pol.Set(5, &p1, &p2, &p3, &p4, &p5);
+    this->polygonTexture = DrawObjectStroke(this->GetRenderer(), &pol);
+    
+    this->starObject = new Star(this->GetEngine());
+    this->starObject->SetPosition(200, 200);
+    this->AttachRenderable(this->starObject);
+    
+    this->collisionFont = this->CreateTextFont();
+    this->collisionFont->LoadFontFile("assets/engine/arial.ttf");
+    
+    this->collisionText = this->CreateText(this->collisionFont);
+    this->collisionText->SetColor(0x000000FF);
+    this->collisionText->SetCharacterSize(72);
+    this->collisionText->SetPositionSystem(POSITION_SYSTEM::VIEWPORT_STATIC);
+    this->collisionText->SetPosition(500, 500);
+    this->collisionText->SetText("COLLISION");
 }
 
 NavigationModule::~NavigationModule()
@@ -43,12 +67,19 @@ void NavigationModule::Update(unsigned int deltaTime)
 
     this->camera->Update(deltaTime);
     
+    this->starObject->Update(deltaTime);
+    
     FPolygon playerPol = this->GamePlayer->PlayerSprite->GetPolygon();
     FPolygon islandOnePol = this->WorldMap->islands->Get(0)->AsPolygon();
     
-    if(playerPol.IsCollision(&islandOnePol))
+    if(playerPol.IsCollision(this->starObject->HitArea))
     {
-        printf("Oh dang");
+        this->collisionText->Show(true);
+        //printf("Oh dang");
+    }
+    else
+    {
+        this->collisionText->Show(false);
     }
 
     if(this->GetEngine()->Keyboard->IsKeyClicked(Key::Space))
@@ -107,4 +138,6 @@ void NavigationModule::Draw(ARenderer* renderer)
     GameModule::Draw(renderer);
 
     this->GamePlayer->Draw();
+
+    //renderer->DrawTexture(this->polygonTexture, 100, 100);
 }

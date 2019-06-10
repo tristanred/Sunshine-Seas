@@ -7,6 +7,7 @@
 #include "Navigation/Navigator.h"
 #include "Navigation/PointListNavigator.h"
 #include "Navigation/NavigationCamera.h"
+#include "Star.h"
 
 class TestSprite : public ASprite
 {
@@ -24,6 +25,12 @@ public:
     NavigationCamera* camera;
     Player* GamePlayer;
     Map* WorldMap;
+    Star* starObject;
+    
+    AFont* collisionFont;
+    AText* collisionText;
+
+    ATexture* polygonTexture;
 
     PointListNavigator* navig;
 
