@@ -1,6 +1,6 @@
 #include "Star.h"
 
-Star::Star(GameEngine* engine) : ARenderable(engine->Renderer)
+Star::Star(GameEngine* engine) : ARenderable(engine)
 {
     this->StarImage = engine->CreateSprite();
     this->StarImage->SetTexture("star.png");

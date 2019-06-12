@@ -6,7 +6,7 @@
 Player::Player()
     : GameObject()
 {
-
+    this->PlayerSprite = NULL;
 }
 
 Player::~Player()
@@ -30,7 +30,7 @@ void Player::Update(unsigned int deltaTime)
 
     this->PlayerSprite->Update(deltaTime);
 
-    vec2_mul_scalar(&this->velocity, 0.90);
+    vec2_mul_scalar(&this->velocity, 0.90f);
 
     if(this->GetEngine()->Keyboard->IsKeyDown(Key::D))
     {
@@ -65,9 +65,4 @@ void Player::Update(unsigned int deltaTime)
     pos.X += this->velocity.x;
     pos.Y += this->velocity.y;
     this->PlayerSprite->SetPosition(pos);
-}
-
-void Player::Draw()
-{
-    GameObject::Draw();
 }

@@ -12,6 +12,7 @@ PointListNavigator::PointListNavigator(ArrayList<NavigationCell*>* points)
     this->TimePerPoint = 0;
     this->CurrentPoint = NULL;
     this->NextPoint = NULL;
+    this->currentPointIndex = NULL;
 }
 
 PointListNavigator::~PointListNavigator()
@@ -34,7 +35,7 @@ void PointListNavigator::Start(unsigned int totalTime)
     }
 
     this->CurrentPointTime = 0;
-    this->TimePerPoint = totalTime / this->NavigationPoints->Count();
+    this->TimePerPoint = (uint32_t)(totalTime / this->NavigationPoints->Count());
 
     this->CurrentPoint = this->NavigationPoints->Get(0);
     this->NextPoint = this->NavigationPoints->Get(1);

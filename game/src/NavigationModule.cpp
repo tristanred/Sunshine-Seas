@@ -7,8 +7,8 @@
 #include <libtech/geometry.h>
 #include "DrawShapeHelper.h"
 
-TestSprite::TestSprite(ARenderer* renderer)
-    : ASprite(renderer)
+TestSprite::TestSprite(GameEngine* engine)
+    : ASprite(engine)
 {
 }
 
@@ -136,8 +136,4 @@ void NavigationModule::Update(unsigned int deltaTime)
 void NavigationModule::Draw(ARenderer* renderer)
 {
     GameModule::Draw(renderer);
-
-    this->GamePlayer->Draw();
-
-    //renderer->DrawTexture(this->polygonTexture, 100, 100);
 }

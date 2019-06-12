@@ -12,7 +12,7 @@
 class TestSprite : public ASprite
 {
 public:
-    TestSprite(ARenderer* renderer);
+    TestSprite(GameEngine* engine);
     ~TestSprite();
 };
 

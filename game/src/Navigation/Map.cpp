@@ -4,7 +4,7 @@
 #include <libtech/stdutils.h>
 
 Map::Map(GameEngine* engine)
-    : ARenderable(engine->Renderer)
+    : ARenderable(engine)
 {
     this->engine = engine;
 
@@ -29,10 +29,10 @@ Map::Map(GameEngine* engine)
     this->AddChild(this->MapImage);
     this->AddChild(this->GraphicLayer);
 
-    GridWidth = mapTex->GetSize().Width / GRIDSIZE;
-    GridHeight = mapTex->GetSize().Height / GRIDSIZE;
+    GridWidth = (int)mapTex->GetSize().Width / GRIDSIZE;
+    GridHeight = (int)mapTex->GetSize().Height / GRIDSIZE;
 
-    this->navigationGrid = new ArrayList<NavigationCell*>(GridWidth * GridHeight);
+    this->navigationGrid = new ArrayList<NavigationCell*>((uint64_t)GridWidth * (uint64_t)GridHeight);
     for(int i = 0; i < GridWidth; i++)
     {
         for(int k = 0; k < GridHeight; k++)
