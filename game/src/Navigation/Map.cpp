@@ -37,7 +37,7 @@ Map::Map(GameEngine* engine)
     {
         for(int k = 0; k < GridHeight; k++)
         {
-            FRectangle* gridsRect = new FRectangle(i * GRIDSIZE, k * GRIDSIZE, GRIDSIZE, GRIDSIZE);
+            FRectangle* gridsRect = new FRectangle((float)(i * GRIDSIZE), (float)(k * GRIDSIZE), (float)GRIDSIZE, (float)GRIDSIZE);
             mapTex->StrokeRect(*gridsRect, 1, 0xFF0000FF);
 
             NavigationCell* cell = new NavigationCell(gridsRect);
