@@ -3,7 +3,7 @@
 #include <Game/Game.h>
 
 
-class Star : public ARenderable
+class Star : public RenderableObject
 {
 public:
     Star(GameEngine* engine);

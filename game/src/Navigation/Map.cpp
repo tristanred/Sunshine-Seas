@@ -4,7 +4,7 @@
 #include <libtech/stdutils.h>
 
 Map::Map(GameEngine* engine)
-    : ARenderable(engine)
+    : RenderableObject(engine)
 {
     this->engine = engine;
 

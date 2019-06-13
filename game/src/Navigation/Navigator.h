@@ -8,7 +8,7 @@ public:
     Navigator();
     virtual ~Navigator();
 
-    ARenderable* Object;
+    RenderableObject* Object;
 
     bool IsActive;
 

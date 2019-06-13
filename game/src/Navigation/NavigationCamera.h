@@ -11,14 +11,14 @@ public:
 
     void Activate();
 
-    void TrackObject(ARenderable* target, FRectangle bounds);
+    void TrackObject(RenderableObject* target, FRectangle bounds);
 
     void Update(unsigned int deltaTime);
 
 private:
     GameEngine* eng;
 
-    ARenderable* Target;
+    RenderableObject* Target;
     FRectangle trackingBounds;
 
     Viewport* cameraVP;

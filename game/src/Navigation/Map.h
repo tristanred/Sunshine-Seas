@@ -8,7 +8,7 @@ class NavigationCell;
 
 #define GRIDSIZE 64
 
-class Map : public ARenderable
+class Map : public RenderableObject
 {
 public:
     Map(GameEngine* engine);

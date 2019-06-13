@@ -20,7 +20,7 @@ void NavigationCamera::Activate()
     this->eng->SelectViewport(this->cameraVP);
 }
 
-void NavigationCamera::TrackObject(ARenderable* target, FRectangle bounds)
+void NavigationCamera::TrackObject(RenderableObject* target, FRectangle bounds)
 {
     this->Target = target;
     this->trackingBounds = bounds;
