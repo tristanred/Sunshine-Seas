@@ -24,7 +24,7 @@ NavigationModule::NavigationModule(GameEngine* engine)
     this->WorldMap = new Map(this->GetEngine());
     this->AttachRenderable(this->WorldMap);
 
-    this->GamePlayer = new Player();
+    this->GamePlayer = new Player(this->GetEngine());
     this->GamePlayer->Setup(this);
 
     this->camera = new NavigationCamera(this->GetEngine());

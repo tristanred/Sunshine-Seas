@@ -3,8 +3,8 @@
 #include <Input/AKeyboard.h>
 #include <math.h>
 
-Player::Player()
-    : GameObject()
+Player::Player(GameEngine* engine)
+    : GameObject(engine)
 {
     this->PlayerSprite = NULL;
 }
@@ -16,8 +16,6 @@ Player::~Player()
 
 void Player::Setup(GameModule* currentModule)
 {
-    GameObject::Setup(currentModule);
-
     this->PlayerSprite = currentModule->CreateSprite();
     this->PlayerSprite->SetTexture("Player.png");
 

@@ -1,5 +1,7 @@
 #pragma once
 
+class GameEngine;
+
 #include <Game/GameObject.h>
 #include <Game/Game.h>
 #include <libtech/vec.h>
@@ -13,9 +15,9 @@ public:
 
     vec2 velocity;
 
-    Player();
+    Player(GameEngine* engine);
     ~Player();
 
-    void Setup(GameModule* currentModule) override;
+    void Setup(GameModule* currentModule);
     void Update(unsigned int deltaTime) override;
 };
