@@ -41,20 +41,24 @@ NavigationModule::NavigationModule(GameEngine* engine)
     vec2 p5 = vec2(0, 200);
     pol.Set(5, &p1, &p2, &p3, &p4, &p5);
     this->polygonTexture = DrawObjectStroke(this->GetRenderer(), &pol);
-    
+
     this->starObject = new Star(this->GetEngine());
     this->starObject->SetPosition(200, 200);
     this->AttachRenderable(this->starObject);
-    
+
     this->collisionFont = this->CreateTextFont();
     this->collisionFont->LoadFontFile("assets/engine/arial.ttf");
-    
+
     this->collisionText = this->CreateText(this->collisionFont);
     this->collisionText->SetColor(0x000000FF);
     this->collisionText->SetCharacterSize(72);
     this->collisionText->SetPositionSystem(POSITION_SYSTEM::VIEWPORT_STATIC);
     this->collisionText->SetPosition(500, 500);
     this->collisionText->SetText("COLLISION");
+
+    this->NPC_Boat = new IdleNavigator(this->GetEngine());
+    this->NPC_Boat->SetupNavigation(this->WorldMap);
+    this->AttachRenderable(this->NPC_Boat);
 }
 
 NavigationModule::~NavigationModule()
@@ -66,12 +70,14 @@ void NavigationModule::Update(unsigned int deltaTime)
     GameModule::Update(deltaTime);
 
     this->camera->Update(deltaTime);
-    
+
     this->starObject->Update(deltaTime);
-    
+
+    this->NPC_Boat->Update(deltaTime);
+
     FPolygon playerPol = this->GamePlayer->PlayerSprite->GetPolygon();
     FPolygon islandOnePol = this->WorldMap->islands->Get(0)->AsPolygon();
-    
+
     if(playerPol.IsCollision(this->starObject->HitArea))
     {
         this->collisionText->Show(true);

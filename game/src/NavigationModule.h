@@ -8,6 +8,7 @@
 #include "Navigation/PointListNavigator.h"
 #include "Navigation/NavigationCamera.h"
 #include "Star.h"
+#include "IdleNavigator.h"
 
 class TestSprite : public ASprite
 {
@@ -26,13 +27,15 @@ public:
     Player* GamePlayer;
     Map* WorldMap;
     Star* starObject;
-    
+
     AFont* collisionFont;
     AText* collisionText;
 
     ATexture* polygonTexture;
 
     PointListNavigator* navig;
+
+    IdleNavigator* NPC_Boat;
 
     void Update(unsigned int deltaTime) override;
     void Draw(ARenderer* renderer) override;
