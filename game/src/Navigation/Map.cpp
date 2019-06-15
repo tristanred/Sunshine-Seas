@@ -10,7 +10,7 @@ Map::Map(GameEngine* engine)
 
     this->MapImage = engine->CreateSprite();
     this->MapImage->SetTexture("world01.png");
-    
+
     this->GraphicLayer = engine->CreateSprite();
     ATexture* transparentTexture = engine->CreateTexture();
     transparentTexture->SetSolidColor(this->MapImage->GetSize(), 0x00000000);
@@ -153,7 +153,7 @@ NavigationCell* Map::GetCurrentCell(FPosition playerPosition)
             return cell;
         }
     }
-    
+
     return NULL;
 }
 
@@ -162,3 +162,17 @@ NavigationCell* Map::GetCell(int column, int row)
     int index = (column * this->GridWidth) + row;
     return navigationGrid->Get(index);
 }
+
+NavigationCell* Map::GetCellFromCoordinates(int x, int y)
+{
+    int gridX = x / this->GridWidth;
+    int gridY = y / this->GridHeight;
+
+    return this->GetCell(gridX, gridY);
+}
+
+NavigationCell* Map::GetCellFromCoordinates(vec2 coords)
+{
+    return this->GetCellFromCoordinates(coords.x, coords.y);
+}
+

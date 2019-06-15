@@ -22,9 +22,13 @@ public:
 
     NavigationCell* GetCell(int column, int row);
 
+    NavigationCell* GetCellFromCoordinates(int x, int y);
+    NavigationCell* GetCellFromCoordinates(vec2 coords);
+
+
 private:
     GameEngine* engine;
-    
+
     int GridWidth;
     int GridHeight;
 

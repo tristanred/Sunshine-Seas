@@ -15,28 +15,99 @@ IdleNavigator::IdleNavigator(GameEngine*  engine)
 
     this->AddChild(this->Avatar);
 
-    //this->navig = new PointListNavigator()
+    this->CurrentList = new Queue<vec2*>();
+    this->OriginalList = new Queue<vec2*>();
+
+    this->OriginalList->Push(new vec2(0, 0));
+    this->OriginalList->Push(new vec2(100, 400));
+    this->OriginalList->Push(new vec2(600, 200));
+    this->OriginalList->Push(new vec2(1000, 150));
+
+    this->navig = NULL;
+    this->gameMap = NULL;
+
+    this->currentState = IDLE;
 }
 
 IdleNavigator::~IdleNavigator()
 {
+    this->GetEngine()->ReleaseObject(this->NPC_Texture);
+    this->GetEngine()->ReleaseObject(this->Avatar);
 
+    if(this->navig != NULL)
+        delete(this->navig);
 }
 
 void IdleNavigator::SetupNavigation(Map* map)
 {
-    NavigationCell* x = map->GetCell(0, 0);
-    NavigationCell* x2 = map->GetCell(20, 2);
+    this->gameMap = map;
 
-    auto firstSegment = Pathfind(x, x2, NULL, NULL);
+    this->CurrentList->PushRange(this->OriginalList);
 
-    this->navig = new PointListNavigator(firstSegment);
-    this->navig->Object = this;
-    this->navig->Start(10000);
+    this->currentState = DESTINATION_REACHED;
 }
 
 void IdleNavigator::Update(unsigned int deltaTime)
 {
+    switch(this->currentState)
+    {
+        case IDLE:
+        {
+            return;
+        }
+        case NAVIGATING:
+        {
+            if(this->navig != NULL)
+            {
+                this->navig->Update(deltaTime);
+            }
+
+            if(this->navig->IsActive == false)
+            {
+                this->currentState = DESTINATION_REACHED;
+            }
+
+            break;
+        }
+        case DESTINATION_REACHED:
+        {
+            vec2* next =  this->CurrentList->Pop();
+
+            if(next == NULL)
+            {
+                this->currentState = NAVIG_ENDED;
+
+                break;
+            }
+
+            NavigationCell* currentCell = gameMap->GetCellFromCoordinates(this->GetPosition().AsVec());
+            NavigationCell* nextCell = gameMap->GetCellFromCoordinates(*next);
+
+            auto firstSegment = Pathfind(currentCell, nextCell, NULL, NULL);
+
+            if(this->navig != NULL)
+            {
+                delete(this->navig);
+            }
+
+            this->navig = new PointListNavigator(firstSegment);
+            this->navig->Object = this;
+            this->navig->Start(10000);
+
+            this->currentState = NAVIGATING;
+
+            break;
+        }
+        case NAVIG_ENDED:
+        {
+            this->CurrentList->PushRange(this->OriginalList);
+
+            this->currentState = DESTINATION_REACHED;
+
+            break;
+        }
+    }
+
     if(this->navig != NULL)
     {
         this->navig->Update(deltaTime);
