@@ -10,13 +10,6 @@
 #include "Star.h"
 #include "IdleNavigator.h"
 
-class TestSprite : public ASprite
-{
-public:
-    TestSprite(GameEngine* engine);
-    ~TestSprite();
-};
-
 class NavigationModule : public GameModule
 {
 public:

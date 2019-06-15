@@ -7,15 +7,6 @@
 #include <libtech/geometry.h>
 #include "DrawShapeHelper.h"
 
-TestSprite::TestSprite(GameEngine* engine)
-    : ASprite(engine)
-{
-}
-
-TestSprite::~TestSprite()
-{
-}
-
 NavigationModule::NavigationModule(GameEngine* engine)
     : GameModule(engine)
 {
