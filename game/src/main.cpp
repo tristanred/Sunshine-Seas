@@ -9,7 +9,7 @@ int main(int argc, char** argv)
     GameEngine eng;
     eng.Initialize();
 
-    eng.CreateModule<NavigationModule>();
+    eng.ActivateModule<NavigationModule>();
 
 
     eng.Play();
