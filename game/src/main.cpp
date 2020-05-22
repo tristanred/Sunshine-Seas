@@ -2,7 +2,12 @@
 
 #include <GameEngine.h>
 
-#include "NavigationModule.h" 
+#include "NavigationModule.h"
+
+#include "World/Landmass.h"
+#include "World/Settlement.h"
+#include "World/Grid.h"
+#include "World/World.h"
 
 int main(int argc, char** argv)
 {

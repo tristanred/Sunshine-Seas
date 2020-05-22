@@ -2,13 +2,13 @@
 
 #include <Game/Game.h>
 
-#include "Player.h"
-#include "Navigation/Map.h"
-#include "Navigation/Navigator.h"
-#include "Navigation/PointListNavigator.h"
-#include "Navigation/NavigationCamera.h"
-#include "Star.h"
 #include "IdleNavigator.h"
+#include "Navigation/NavigationCamera.h"
+#include "Player.h"
+#include "World/Grid.h"
+#include "World/Landmass.h"
+#include "World/Settlement.h"
+#include "World/World.h"
 
 class NavigationModule : public GameModule
 {
@@ -18,17 +18,8 @@ public:
 
     NavigationCamera* camera;
     Player* GamePlayer;
-    Map* WorldMap;
-    Star* starObject;
 
-    AFont* collisionFont;
-    AText* collisionText;
-
-    ATexture* polygonTexture;
-
-    PointListNavigator* navig;
-
-    IdleNavigator* NPC_Boat;
+    World* world;
 
     void Update(unsigned int deltaTime) override;
     void Draw(ARenderer* renderer) override;
