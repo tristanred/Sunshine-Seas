@@ -9,6 +9,7 @@
 #include "World/Landmass.h"
 #include "World/Settlement.h"
 #include "World/World.h"
+#include "Navigation/WorldBoundsLimiter.h"
 
 class NavigationModule : public GameModule
 {
@@ -17,6 +18,7 @@ public:
     ~NavigationModule();
 
     NavigationCamera* camera;
+    WorldBoundsLimiter* playerAreaLimiter;
     Player* GamePlayer;
 
     World* world;

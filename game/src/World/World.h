@@ -16,6 +16,8 @@ public:
     void Update(unsigned int deltaTime);
     void Draw(ARenderer* renderer);
 
+    FRectangle GetBounds();
+
 private:
     GameEngine* engine;
     NavigationModule* module;

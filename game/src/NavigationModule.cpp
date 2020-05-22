@@ -17,11 +17,14 @@ NavigationModule::NavigationModule(GameEngine* engine) : GameModule(engine)
 
     this->camera = new NavigationCamera(this->GetEngine());
     this->camera->TrackObject(this->GamePlayer->PlayerSprite,
-                              FRectangle(0, 0, 12288, 12288));
+                              FRectangle(0, 0, GRID_SIZE * 3, GRID_SIZE * 3));
     this->camera->Activate();
 
     this->world = new World(this);
     this->world->PopulateWithTestData();
+
+    playerAreaLimiter = new WorldBoundsLimiter(this->world);
+    playerAreaLimiter->TargetPlayer(this->GamePlayer);
 }
 
 NavigationModule::~NavigationModule() {}
@@ -34,6 +37,8 @@ void NavigationModule::Update(unsigned int deltaTime)
     this->GamePlayer->Update(deltaTime);
 
     this->camera->Update(deltaTime);
+
+    playerAreaLimiter->Update(deltaTime);
 }
 
 void NavigationModule::Draw(ARenderer* renderer)

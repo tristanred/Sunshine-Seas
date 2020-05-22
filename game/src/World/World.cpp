@@ -146,3 +146,8 @@ void World::Draw(ARenderer* renderer)
         begin++;
     }
 }
+
+FRectangle World::GetBounds()
+{
+    return FRectangle(0, 0, GRID_SIZE * 3, GRID_SIZE * 3);
+}
