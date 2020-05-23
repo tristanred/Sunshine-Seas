@@ -14,9 +14,10 @@ NavigationModule::NavigationModule(GameEngine* engine) : GameModule(engine)
 
     this->GamePlayer = new Player(this->GetEngine());
     this->GamePlayer->Setup(this);
+    this->AttachRenderable(this->GamePlayer);
 
     this->camera = new NavigationCamera(this->GetEngine());
-    this->camera->TrackObject(this->GamePlayer->PlayerSprite,
+    this->camera->TrackObject(this->GamePlayer,
                               FRectangle(0, 0, GRID_SIZE * 3, GRID_SIZE * 3));
     this->camera->Activate();
 

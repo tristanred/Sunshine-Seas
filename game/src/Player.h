@@ -2,17 +2,15 @@
 
 class GameEngine;
 
-#include <Game/GameObject.h>
 #include <Game/Game.h>
+#include <Game/GameObject.h>
 #include <libtech/vec.h>
 
 #define MAX_VELOCITY 10
 
-class Player : public GameObject
+class Player : public RenderableObject
 {
 public:
-    ASprite* PlayerSprite;
-
     vec2 velocity;
 
     Player(GameEngine* engine);

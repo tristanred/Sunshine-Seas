@@ -17,9 +17,9 @@ void WorldBoundsLimiter::TargetPlayer(Player* player)
 
 void WorldBoundsLimiter::Update(unsigned int deltaTime)
 {
-    FRectangle playerRect = this->target->PlayerSprite->GetRectangle();
+    FRectangle playerRect = this->target->GetRectangle();
 
     playerRect.PushInside(&this->bounds);
 
-    this->target->PlayerSprite->SetPosition(playerRect.GetPosition());
+    this->target->SetPosition(playerRect.GetPosition());
 }

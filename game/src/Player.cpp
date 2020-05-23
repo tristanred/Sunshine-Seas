@@ -3,21 +3,14 @@
 #include <Input/AKeyboard.h>
 #include <math.h>
 
-Player::Player(GameEngine* engine)
-    : GameObject(engine)
-{
-    this->PlayerSprite = NULL;
-}
+Player::Player(GameEngine* engine) : RenderableObject(engine) {}
 
-Player::~Player()
-{
-
-}
+Player::~Player() {}
 
 void Player::Setup(GameModule* currentModule)
 {
-    this->PlayerSprite = currentModule->CreateSprite();
-    this->PlayerSprite->SetTexture("Player.png");
+    auto tex = this->GetEngine()->CreateTexture("Player.png");
+    this->SetTexture(tex);
 
     this->velocity = vec2(0);
 }
@@ -25,8 +18,6 @@ void Player::Setup(GameModule* currentModule)
 void Player::Update(unsigned int deltaTime)
 {
     GameObject::Update(deltaTime);
-
-    this->PlayerSprite->Update(deltaTime);
 
     vec2_mul_scalar(&this->velocity, 0.90f);
 
@@ -59,8 +50,8 @@ void Player::Update(unsigned int deltaTime)
         }
     }
 
-    FPosition pos = this->PlayerSprite->GetPosition();
+    FPosition pos = this->GetPosition();
     pos.X += this->velocity.x;
     pos.Y += this->velocity.y;
-    this->PlayerSprite->SetPosition(pos);
+    this->SetPosition(pos);
 }
